@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Good Girl's Guide to Murder | The Podcast</title>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Montserrat:wght@400;700&family=Playfair+Display:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blood-red: #a30000;
+            --tape-white: #e8e8e8;
+            --dark-bg: #0f0f0f;
+            --text-color: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--blood-red);
+        }
+
+        .nav-logo {
+            height: 60px;
+            width: 60px;
+            object-fit: contain;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--blood-red);
+        }
+
+        /* Hero Section */
+        header {
+            height: 85vh;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.7)), url('images/banner.avif');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 80px;
+            text-align: center;
+        }
+
+        .hero-content {
+            background: rgba(0,0,0,0.8);
+            padding: 30px 50px;
+            backdrop-filter: blur(8px);
+            border-top: 5px solid var(--blood-red);
+            max-width: 800px;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        /* Podcast Intro Section */
+        .intro {
+            padding: 100px 5%;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .intro-img {
+            width: 350px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 0 40px rgba(163, 0, 0, 0.4);
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .intro-img:hover {
+            transform: rotate(-3deg) scale(1.05);
+        }
+
+        .intro-text h2 {
+            font-family: 'Courier Prime', monospace;
+            color: var(--blood-red);
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        /* Feature Sections */
+        .feature-row {
+            display: flex;
+            background: #151515;
+            margin: 80px 0;
+            min-height: 600px;
+        }
+
+        .feature-row.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .feature-image {
+            flex: 1.2;
+            background-size: cover;
+            background-position: center;
+            filter: saturate(0.8) contrast(1.1);
+        }
+
+        .feature-content {
+            flex: 1;
+            padding: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .feature-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            color: var(--blood-red);
+        }
+
+        /* Evidence Tape Sticker */
+        .tape-banner {
+            background: #ffd700;
+            color: #000;
+            font-family: 'Courier Prime', monospace;
+            font-weight: 900;
+            padding: 20px;
+            text-align: center;
+            transform: rotate(-1deg) scale(1.05);
+            margin: 100px 0;
+            text-transform: uppercase;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            border-top: 2px dashed #000;
+            border-bottom: 2px dashed #000;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--blood-red);
+            color: white;
+            padding: 18px 40px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 30px;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            border: 2px solid var(--blood-red);
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--blood-red);
+        }
+
+        footer {
+            padding: 60px;
+            text-align: center;
+            background: #000;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.9rem;
+            border-top: 1px solid #222;
+        }
+
+        /* Responsive Settings */
+        @media (max-width: 900px) {
+            .intro, .feature-row, .feature-row.reverse {
+                flex-direction: column;
+            }
+            .feature-image { height: 400px; width: 100%; }
+            header h1 { font-size: 2.2rem; }
+            .feature-content { padding: 50px 30px; }
+            .intro-img { width: 280px; height: 280px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <img src="images/sticker.jpg" alt="Logo" class="nav-logo">
+        <ul>
+            <li><a href="#about">The Case</a></li>
+            <li><a href="#episodes">Audio Logs</a></li>
+            <li><a href="#suspects">Suspect List</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <div class="hero-content">
+            <h1>"Who killed Andie Bell?"</h1>
+            <p style="font-family: 'Courier Prime'; letter-spacing: 1px;">Little Kilton's most famous cold case is about to be cracked.</p>
+        </div>
+    </header>
+
+    <section class="intro" id="about">
+        <img src="images/sticker.jpg" alt="Podcast Cover Sticker" class="intro-img">
+        <div class="intro-text">
+            <h2>Investigation Log</h2>
+            <p>Every small town has its secrets. But Little Kilton’s are deadlier than most. Sal Singh was accused of murder, but the town never looked for the truth. They looked for a scapegoat. Pippa Fitz-Amobi is changing the narrative.</p>
+            <p style="margin-top: 15px; opacity: 0.8;">Join the investigation as we revisit the logs, the hidden diaries, and the burner phones that the police ignored five years ago.</p>
+            <a href="#" class="btn">Start Listening</a>
+        </div>
+    </section>
+
+    <div class="tape-banner">
+        /// EVIDENCE FILE NO. 2024-PIP /// CASE STATUS: RE-OPENED /// DO NOT REMOVE FROM OFFICE ///
+    </div>
+
+    <!-- Section with Pip (pip.jpg) -->
+    <section class="feature-row" id="episodes">
+        <div class="feature-image" style="background-image: url('images/pip.jpg');"></div>
+        <div class="feature-content">
+            <h3>Behind the Headphones</h3>
+            <p>Go inside Pip’s workspace. This podcast captures the raw, unfiltered progress of her Senior Project turned true-crime sensation. From late-night recording sessions to high-stakes interviews, you hear everything Pip hears.</p>
+            <p style="margin-top: 15px;">New episodes drop every Tuesday. Stay alert, stay curious, and don't trust anyone.</p>
+        </div>
+    </section>
+
+    <!-- Section with Cast (cast.avif) -->
+    <section class="feature-row reverse" id="suspects">
+        <div class="feature-image" style="background-image: url('images/cast.avif');"></div>
+        <div class="feature-content">
+            <h3>The Little Kilton Circles</h3>
+            <p>Meet the friends, the family, and the enemies left in the wake of Andie Bell's disappearance. In this town, the lines between guilt and innocence are thinner than you think. Is the killer still sitting on these very steps?</p>
+            <a href="#" class="btn">View Witness Statements</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>A GOOD GIRL'S GUIDE TO MURDER | THE OFFICIAL PODCAST EXPERIENCE</p>
+        <p style="color: #555; margin-top: 15px; font-size: 0.75rem;">Produced by Pip Fitz-Amobi & Ravi Singh. All rights reserved. Based on the characters created by Holly Jackson.</p>
+    </footer>
+
+</body>
+</html>
