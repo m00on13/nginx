@@ -1,0 +1,59 @@
+# //no. of parallel process nginx can spawn to handle client requests /traffic 
+# //influences how well it can manage traffic and performance. Sould be set based on 
+# //             1. No. Of CPU Cores on server
+# //             2. Exepected traffic
+# //general: No. of workers equals no. of CPU Cores
+# // auto - ngingx auto detects no. cores available and sets it 
+
+worker_processes 1;
+
+
+events{
+    #   //no. of connections each worker wil handle simultaeneuously. Higher value higher requests managed but increases memory usage 
+    #   //actual simultaneous connections cannot exceed the current limit on the max no. of open files 
+    worker_connections 1024;
+}
+
+# // main config defining how to handle http requests 
+http{
+
+    # //the mime types / files that the server can send back in downstream 
+    include mime.types;
+
+    # // Servers to which nginx forwards the requests 
+    # // upstream and downstream - flow of data 
+    # //upstream - traffic oing from client toward the source of higher level infra (eg. application server)
+    # //downstream - traffic going back to the client 
+    upstream nodejs_cluster{
+        #// the algorithm used to load balance. By default it uses round robin
+        least_conn;
+
+        #// available servers on which the request can be sent 
+        server 127.0.0.1:3001;
+        server 127.0.0.1:3002;
+        server 127.0.0.1:3003;        
+    }
+    # // defines how nginx ahould handle requests for a particular domain or ip address.
+    # // defines : how to listen for connetions, which domains or sub domains the config applies to , how to route the requests ( what to do with the requests) 
+    server{
+        # //ip address and port on which the server will accepy requests
+        listen 8080;
+
+        # //which domain or ip address theis server block should respond to 
+        server_name localhost;
+
+        # //how specific types of requests- url's or file types, etc. should be handled 
+        location / {
+
+           # //tells nginx to pass the request to another server making it act as a reverse proxy
+            proxy_pass http://nodejs_cluster;
+
+            # //sends original url that client requested to the backend server 
+            proxy_set_header Host $host;
+
+            # // getting the ip address of the client aka on which the requested url is to be sent back 
+            proxy_set_header X-Real-IP $remote_addr;
+             
+        }
+    }
+}
